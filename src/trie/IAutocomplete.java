@@ -3,7 +3,7 @@ package autocomplete;
 import java.util.List;
 
 /**
- * @author ericfouh
+ * @author Eric Fouh (Professor at University of Pennsylvania)
  */
 public interface IAutocomplete
 {
