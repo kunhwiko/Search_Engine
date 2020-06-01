@@ -153,7 +153,7 @@ public class Search implements ISearch
         }
         /* sort in reverse tag term TFIDF value */
         for (String key : res.keySet()) {
-            Collections.sort(res.get(key), IndexBuilder.compInvertedIndex());
+            Collections.sort(res.get(key), Search.compInvertedIndex());
         }
         return res;
     }
@@ -182,7 +182,7 @@ public class Search implements ISearch
             List<String> arr = new ArrayList<>();
 
             /* do not include stop words */
-            if (IIndexBuilder.STOPWORDS.contains((String) term))
+            if (ISearch.STOPWORDS.contains((String) term))
                 continue;
 
             /* for loop through every entry */
@@ -192,7 +192,7 @@ public class Search implements ISearch
             AbstractMap.SimpleEntry<String, List<String>> tuple = new SimpleEntry<>((String) term, arr);
             res.add(tuple);
         }
-        Collections.sort(res,IndexBuilder.compHomePage());
+        Collections.sort(res,Search.compHomePage());
         return res;
     }
 
@@ -230,7 +230,7 @@ public class Search implements ISearch
             }   
             
             /* write words to file in lexicographical order */
-            Collections.sort(res,IndexBuilder.compAutocompleteFile());
+            Collections.sort(res,Search.compAutocompleteFile());
             for(String word : res) {
                 writer.write(" 0 " + word + "\n");
             }
