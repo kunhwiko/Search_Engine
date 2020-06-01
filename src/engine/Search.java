@@ -85,5 +85,45 @@ public class Search implements ISearch
             return null;
         } 
     }
-    
+
+    @Override
+    public Map<String, Map<String, Double>> buildIndex(Map<String, List<String>> docs) {
+        Map<String, Map<String, Double>> res = new HashMap<>();
+
+        /* go through every key in docs and calculate respective TF-IDF */
+        for (String key : docs.keySet()) {
+            Map<String, Double> counter = new HashMap<>();
+            
+            /* treemap will allow for lexicographical order of value */
+            Map<String, Double> forwardIndex = new TreeMap<>();
+
+            /* go through every word in an html file to create a counter */
+            for (String value : docs.get(key)) {
+                counter.put(value, counter.getOrDefault(value, 0.0) + 1);
+            }
+
+            /* calculate TF and IDF values */
+            for (String keyWord : counter.keySet()) {
+                /* TF value */
+                double tf = counter.get(keyWord) / docs.get(key).size();
+
+                /* find the number of documents with current term */
+                int termCount = 0;
+                for (String key2 : docs.keySet()) {
+                    if (docs.get(key2).contains(keyWord))
+                        termCount++;
+                }
+                /* IDF value */
+                double ratio = (double) (docs.size()) / (double) termCount;
+                double idf = Math.log(ratio);
+
+                /* TF-IDF value */
+                double tfidf = tf * idf;
+                forwardIndex.put(keyWord, tfidf);
+                res.put(key, forwardIndex);
+            }
+        }
+        return res;
+    }
+
 }
