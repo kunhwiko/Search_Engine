@@ -9,8 +9,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * @author ericfouh
+ * @author Eric Fouh (Professor at University of Pennsylvania)
  */
+
 public interface ISearch
 {
     /**
