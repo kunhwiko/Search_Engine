@@ -254,4 +254,14 @@ public class Search implements ISearch
         };
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<String> searchArticles(String queryTerm, Map<?, ?> invertedIndex) {
+        List<String> res = new ArrayList<>();
+        for(Object entries : (ArrayList<Entry<String, List<String>>>) (invertedIndex.get(queryTerm))) {
+            res.add(((Entry<String, List<String>>) entries).getKey());
+        }
+        return res;
+    }
+
 }
