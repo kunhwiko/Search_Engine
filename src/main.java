@@ -15,18 +15,18 @@ public class Main{
     public static void main(String[] args){
         Search search = new Search();
         List<String> arr = new ArrayList<>();
-        arr.add(args[0]);                          // input RSS 
+        arr.add("input RSS link here");              // input RSS 
+
         Map<String, List<String>> docs = search.parseFeed(arr);
-    
         Map<String, Map<String, Double>> index = search.buildIndex(docs);
-    
         Map<String, ArrayList<Entry<String, Double>>> inverted = 
             (Map<String, ArrayList<Entry<String, Double>>>) search.buildInvertedIndex(index);
-    
         List<Entry<String, List<String>>> homepage = (List<Entry<String, List<String>>>) search.buildHomePage(inverted);
-    
+
+        // creates a file called autocomplete.txt that shows all the words found in lexicographic order
         Collection<?> res = search.createAutocompleteFile(homepage);
-    
-        List<String> articles = search.searchArticles(args[1],inverted);
+
+        // when user inputs a term, documents containing the word are returned in most relevant order 
+        List<String> articles = search.searchArticles(args[1],inverted);  // input word
     }
 }
