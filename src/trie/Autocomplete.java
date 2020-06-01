@@ -88,6 +88,7 @@ public class Autocomplete implements IAutocomplete {
 				String query = tokens[1].trim();
 				addWord(query.toLowerCase(), weight);
 			}
+			br.close();
 			return root;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

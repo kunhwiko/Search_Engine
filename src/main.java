@@ -3,13 +3,10 @@
  * @author Kun Hwi Ko
  */
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 
 import engine.Search;
@@ -30,6 +27,6 @@ public class Main{
     
         Collection<?> res = search.createAutocompleteFile(homepage);
     
-        List<String> articles = search.searchArticles("data",inverted);
+        List<String> articles = search.searchArticles(args[1],inverted);
     }
 }

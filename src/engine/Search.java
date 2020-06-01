@@ -26,6 +26,7 @@ import org.jsoup.select.Elements;
 
 public class Search implements ISearch
 {
+    public Search(){ }
 
     @Override
     public Map<String, List<String>> parseFeed(List<String> feeds) {
