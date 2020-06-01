@@ -196,4 +196,62 @@ public class Search implements ISearch
         return res;
     }
 
+    /**
+     * Create and return a comparator to use for buildHomePage Tag term are sorted
+     * by no. of articles, and if equal, by reverse lexicographic order
+     * 
+     * @return the comparator
+     */
+    public static Comparator<Entry<String, List<String>>> compHomePage() {
+        return new Comparator<Entry<String, List<String>>>() {
+            public int compare(Entry<String, List<String>> o1, Entry<String, List<String>> o2) {
+                /* has same number of articles, then sort by reverse lexicographic order */
+                if (o1.getValue().size() == o2.getValue().size()) {
+                    return o2.getKey().compareTo(o1.getKey());
+                }
+                /* else sort by no. of articles */
+                return o2.getValue().size() - o1.getValue().size();
+            }
+        };
+    }
+
+    @Override
+    public Collection<?> createAutocompleteFile(Collection<Entry<String, List<String>>> homepage) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("autocomplete.txt"));
+            ArrayList<String> res = new ArrayList<>();
+            
+            /* write to file the number of words */
+            writer.write(homepage.size() + "\n");
+            
+            for(Entry<String,List<String>> entry : homepage) {
+                String word = entry.getKey();
+                res.add(word);
+            }   
+            
+            /* write words to file in lexicographical order */
+            Collections.sort(res,IndexBuilder.compAutocompleteFile());
+            for(String word : res) {
+                writer.write(" 0 " + word + "\n");
+            }
+            writer.close();
+            return res;     
+        }catch(IOException e) {
+            return null;
+        }
+    }
+    
+    /**
+     * Lexicographical order
+     * 
+     * @return the comparator
+     */
+    public static Comparator<String> compAutocompleteFile() {
+        return new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        };
+    }
+
 }
