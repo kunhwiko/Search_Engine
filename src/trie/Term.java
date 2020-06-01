@@ -1,4 +1,4 @@
-package autocomplete;
+package trie;
 
 /**
  * @author Kun Hwi Ko
