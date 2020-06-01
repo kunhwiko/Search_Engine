@@ -3,7 +3,9 @@
 ### Description
 This search engine is a news aggregator that takes multiple HTML links, parses words, and allows the user to input a word in where the program will attempt to return the most relevant HTML links associated with the word. 
 
-For instance, when the user inputs "New York", HTML links with the keyword "New York" will be returned in most relevant order.
+For instance, when the user inputs "New York", links with the keyword "New York" will be shown in most relevant order.
+
+As a side, the engine will generate a file with all the terms that have been parsed.
 
 The search engine will allow the user to input the following :
 
