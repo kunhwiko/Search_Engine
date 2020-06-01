@@ -158,4 +158,42 @@ public class Search implements ISearch
         return res;
     }
 
+    /**
+     * Create and return a comparator to use for buildInvertedIndex Collection will
+     * be sorted by reverse tag term TFIDF value
+     * 
+     * @return the comparator
+     */
+    public static Comparator<Entry<String, Double>> compInvertedIndex() {
+        return new Comparator<Entry<String, Double>>() {
+            public int compare(Entry<String, Double> o1, Entry<String, Double> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        };
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Collection<Entry<String, List<String>>> buildHomePage(Map<?, ?> invertedIndex) {
+        List<Entry<String, List<String>>> res = new ArrayList<>();
+
+        /* for loop through every term */
+        for (Object term : invertedIndex.keySet()) {
+            List<String> arr = new ArrayList<>();
+
+            /* do not include stop words */
+            if (IIndexBuilder.STOPWORDS.contains((String) term))
+                continue;
+
+            /* for loop through every entry */
+            for (Object entries : (ArrayList<Entry<String, List<String>>>) (invertedIndex.get(term))) {
+                arr.add(((Entry<String, List<String>>) entries).getKey());
+            }
+            AbstractMap.SimpleEntry<String, List<String>> tuple = new SimpleEntry<>((String) term, arr);
+            res.add(tuple);
+        }
+        Collections.sort(res,IndexBuilder.compHomePage());
+        return res;
+    }
+
 }
