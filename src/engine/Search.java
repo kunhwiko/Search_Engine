@@ -126,4 +126,36 @@ public class Search implements ISearch
         return res;
     }
 
+    @Override
+    public Map<?, ?> buildInvertedIndex(Map<String, Map<String, Double>> index) {
+        Map<String, ArrayList<Entry<String, Double>>> res = new HashMap<>();
+
+        for (String outerKey : index.keySet()) {
+            for (String innerKey : index.get(outerKey).keySet()) {
+                /* create an Entry object as (document, TFIDF value) */
+                AbstractMap.SimpleEntry<String, Double> tuple = new SimpleEntry<>(outerKey,
+                        index.get(outerKey).get(innerKey));
+
+                ArrayList<Entry<String, Double>> arr;
+                if (!res.containsKey(innerKey)) {
+                    /*
+                     * if the term does not already exist in hash map, create a new list and map as
+                     * term(key) : arr(value)
+                     */
+                    arr = new ArrayList<>();
+                } else {
+                    /* otherwise if term already exists in hash map, append to list */
+                    arr = res.get(innerKey);
+                }
+                arr.add(tuple);
+                res.put(innerKey, arr);
+            }
+        }
+        /* sort in reverse tag term TFIDF value */
+        for (String key : res.keySet()) {
+            Collections.sort(res.get(key), IndexBuilder.compInvertedIndex());
+        }
+        return res;
+    }
+
 }
