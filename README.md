@@ -14,7 +14,13 @@ The search engine will allow the user to input the following :
   
 
 ### Compile and Run
-  1) Download folder
+  1) Download files and make sure jsoup is properly added to the classpath
+  2) Inside the main function, locate "input RSS link" and "input word"
+  3) The RSS link must be opened to start the program, one can open the link by "python -m http.server <port number>"
+  4) For "input RSS link", put the appropriate RSS link 
+  5) For "input word", put any word to see the most relevant links associated to the word
+  6) Locate variable "listOfWords", and notice that an "autocomplete.txt" has been generated that displays all words parsed
+  7) Locate variable "articles", which contains the links in most relevant order  
 
   
 ### Folders
