@@ -3,7 +3,7 @@ package trie;
 import java.util.Comparator;
 
 /**
- * @author Eric Fouh (Professor at University of Pennsylvania)
+ * @author Kun Hwi Ko
  */
 public interface ITerm extends Comparable<ITerm> {
 
