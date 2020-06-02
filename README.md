@@ -13,7 +13,6 @@ The search engine will allow the user to input the following :
   2) Word to search for 
   
 
-  
 ### Compile and Run
   1) Download folder
 
@@ -21,12 +20,12 @@ The search engine will allow the user to input the following :
 ### Folders
 * Trie
 
-  * Keeps all the words that are found in documents in a trie data structure
+  * Keeps all the words that are found from the links in a trie data structure
  
 * Engine
 
   * Takes an RSS feed with HTML links and parses words from each link
   * Gets rid of "insignificant" words (e.g. conjunctions) during parsing process
-  * Uses an algorithm to map each word to links that the word is most found  
+  * Uses an algorithm to map each word to relevant links   
   * Creates a file that shows all the terms that were parsed
 
