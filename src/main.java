@@ -24,9 +24,9 @@ public class Main{
         List<Entry<String, List<String>>> homepage = (List<Entry<String, List<String>>>) search.buildHomePage(inverted);
 
         // creates a file called autocomplete.txt that shows all the words found in lexicographic order
-        Collection<?> res = search.createAutocompleteFile(homepage);
+        Collection<?> listOfWords = search.createAutocompleteFile(homepage);
 
         // when user inputs a term, documents containing the word are returned in most relevant order 
-        List<String> articles = search.searchArticles(args[1],inverted);  // input word
+        List<String> articles = search.searchArticles("input word",inverted);  // input word
     }
 }
